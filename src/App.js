@@ -1,22 +1,14 @@
 import React from 'react';
 
-class MyComp extends React.Component {
+const App = () => {
 
-    render () {
-        return <h1>Hello World</h1>
-    }
-}
-
-
-const Arrow = () => {
-
-    return <p>I'm an arrow</p>
-}
-
-export default function App () {
-
+    const handleClick = (event) =>{
+        console.log(event)
+    }    
     return <div>
-        <MyComp />
-        <Arrow />
+        <h1>Hello World</h1>
+        <button onClick={handleClick}>Like</button>
     </div>
 }
+
+export default App
