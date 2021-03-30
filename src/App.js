@@ -1,15 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
+
+import {LikeBtn} from './buttons/likeBtn'
 
 const App = () => {
-    const [myCurrentCount, setCurrentCount] = useState(1)
-    const handleClick = (event) =>{
-        console.log(event)
-        setCurrentCount(myCurrentCount + 1)
-        console.log(myCurrentCount)
-    }
     return <div>
         <h1>Hello World</h1>
-        <button onClick={handleClick}>Like {myCurrentCount}</button>
+        <LikeBtn />
     </div>
 }
 
