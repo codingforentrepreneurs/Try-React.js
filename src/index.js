@@ -11,3 +11,14 @@ const App = props => {
 
 ReactDOM.render(<App />, appEl)
 
+
+const cfe2El = document.getElementById('cfe2')
+
+const CFE2 = props => {
+    // jsx
+    return <h1>CFE2</h1>
+}
+
+if (cfe2El) {
+    ReactDOM.render(<CFE2 />, cfe2El)
+}
