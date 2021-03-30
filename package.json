@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel watch index.html"
+    "start": "parcel serve src/index.html -p 1234"
   },
   "dependencies": {
     "react": "17.0.2",
