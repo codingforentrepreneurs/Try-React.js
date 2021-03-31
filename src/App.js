@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {LikeBtn} from './buttons/likeBtn'
 
 
 const App = () => {
+    const [count, setCount] = useState(5001)
+
+    const handleClick=(event)=> {
+        setCount(count + 1)
+    }
+
     return <div id='my-app-div' className='text-red another-class'>
         <h1>Hello World</h1>
-        <LikeBtn className='text-red' initCount={5001} />
+        <button onClick={handleClick}>My incrementor</button>
 
-        <LikeBtn className='text-red' initCount={1} />
-
-        <LikeBtn className='text-red' initCount={51} />
+        <LikeBtn className='text-red' initCount={count} />
     </div>
 }
 

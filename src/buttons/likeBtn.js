@@ -1,8 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 export const LikeBtn = (props) => {
     console.log('LikeBtn', props)
-    const [count, setCount] = useState(props.initCount ? props.initCount : 0)
+    const [count, setCount] = useState(null)
+    
+    useEffect(()=>{
+        setCount(props.initCount)
+    }, [props.initCount])
+    
+    
     const handleClick = (event) =>{
         // send to my server
 
