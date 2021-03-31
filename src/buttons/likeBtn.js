@@ -3,13 +3,28 @@ const Amp = () => <span>&amp;</span>
 
 export const LikeBtn = ({initCount, onCountUpdate, ...otherProps}) => {
     const defaultLabel = otherProps.children ? otherProps.children : 'Like'
-    const [count, setCount] = useState(null)
+    const [count, setCount] = useState(initCount ? initCount : 0)
     const [label, setLabel] = useState(defaultLabel)
     console.log('LikeBtn', otherProps, count, initCount)
  
     useEffect(()=>{
-        setCount(initCount)
+        if (count < initCount) {
+            setLabel("Liked")
+            setCount(initCount)
+        }
     }, [initCount])
+
+    useEffect(()=>{
+        let timeout;
+        if (label !== defaultLabel) {
+            timeout = setTimeout(()=>{
+                setLabel(defaultLabel)
+            }, 1500)
+        }
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [label])
 
     const handleClick = (event) =>{
         // send to my server
