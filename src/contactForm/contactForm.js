@@ -1,12 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 
 export const ContactForm = () => {
-    const [firstName, setFirstName] = useState("Justin")
-    const [lastName, setLastName] = useState("")
+    const myFormRef = useRef(null)
+    const myFirstNameInputRef = useRef(null)
     const [errors, setErrors] = useState({})
-    const [data, setData] = useState({
-        firstName: '',
-        lastName: '',
+    const [isPasswordReady, setPasswordReady] = useState(false)
+    const [passwordData, setPasswordData] = useState({
         password: '',
         passwordConfirm: ''
     }) 
@@ -16,15 +15,20 @@ export const ContactForm = () => {
         const val = event.target.value ? event.target.value : ''
         
         if (name === 'passwordConfirm') {
-            const currentPw = data.password
+            const currentPw = passwordData.password
             if (currentPw !== val) {
+                setPasswordReady(false)
                 setErrors({passwordConfirm: "Passwords must match"})
             } else {
-                setErrors({passwordConfirm: ""})
+                if (currentPw.length > 1) {
+                    setPasswordReady(true)
+                    setErrors({passwordConfirm: ""})
+                }
+                
             }
         }
         
-        setData(prevState => {
+        setPasswordData(prevState => {
             let newData = {...prevState}
             newData[name] = val
             return newData
@@ -36,21 +40,28 @@ export const ContactForm = () => {
         //     setLastName(val)
         // }
     }
-
-    const handleSendBtn = (event) => {
-        if (event) {event.preventDefault()}
+    const handleSubmit = (event) => {
+        if (event) event.preventDefault();
+        if (myFormRef && isPasswordReady) {
+            const fd = new FormData(myFormRef.current)
+            const fdObject = Object.fromEntries(fd)
+            console.log(myFormRef.current, fdObject)
+        }
     }
-    return <form>
-        <p>Hello {data.firstName} {data.lastName}</p>
+
+    return <form ref={myFormRef} onSubmit={handleSubmit}>
+        <p>Hello</p>
         <p>{errors.passwordConfirm}</p>
-        <input type='text' name='firstName' onChange={handleInputChange} value={data.firstName} required placeholder='First name' />
+        <input ref={myFirstNameInputRef} type='text' name='firstName' required placeholder='First name' />
 
-        <input type='text' name='lastName' onChange={handleInputChange} value={data.lastName} placeholder='Last name'/>
+        <input type='text' name='lastName'  placeholder='Last name'/>
 
-        <input type='password' name='password' onChange={handleInputChange} value={data.password} placeholder='password'/>
 
-        <input type='password' name='passwordConfirm' onChange={handleInputChange} value={data.passwordConfirm} placeholder='password'/>
+        <input type='password' required name='password' onChange={handleInputChange} value={passwordData.password} placeholder='password'/>
 
-        <button type='submit' onClick={handleSendBtn} >Send</button>
+<input type='password' required name='passwordConfirm' onChange={handleInputChange} value={passwordData.passwordConfirm} placeholder='password'/>
+
+
+        <button type='submit' >Send</button>
     </form>
 }
