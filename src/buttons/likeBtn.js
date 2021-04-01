@@ -1,36 +1,27 @@
 import React, {useEffect, useState} from 'react';
+
+import {useTempLabel} from '../hooks/useTempLabel'
+
 const Amp = () => <span>&amp;</span>
 
 export const LikeBtn = ({initCount, onCountUpdate, ...otherProps}) => {
     const defaultLabel = otherProps.children ? otherProps.children : 'Like'
+    const [label, toggleLabel] = useTempLabel(defaultLabel, "Liked", 2000)
     const [count, setCount] = useState(initCount ? initCount : 0)
-    const [label, setLabel] = useState(defaultLabel)
     console.log('LikeBtn', otherProps, count, initCount)
  
     useEffect(()=>{
         if (count < initCount) {
-            setLabel("Liked")
+ 
             setCount(initCount)
         }
     }, [initCount])
-
-    useEffect(()=>{
-        let timeout;
-        if (label !== defaultLabel) {
-            timeout = setTimeout(()=>{
-                setLabel(defaultLabel)
-            }, 1500)
-        }
-        return () => {
-            clearTimeout(timeout)
-        }
-    }, [label])
 
     const handleClick = (event) =>{
         // send to my server
 
         // from server
-        setLabel("Liked")
+        toggleLabel()
         const newCount = count + 1
         setCount(newCount)
         if (onCountUpdate){
