@@ -2,6 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App'
+import {DarkModeProvider} from './darkMode/context'
 
 const appEl = document.getElementById('cfe')
-ReactDOM.render(<App />, appEl)
+
+const RootApp = () => {
+
+    return <DarkModeProvider>
+        <App />
+    </DarkModeProvider>
+}
+
+
+ReactDOM.render(<RootApp />, appEl)

@@ -1,28 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
+
 
 import {LikeBtn} from './buttons/likeBtn'
+import {DarkModeProvider, useDarkMode} from './darkMode/context'
 
-
-const Amp = () => <span>&amp;</span>
+import {DarkModeBtn} from './darkMode/button'
 
 const App = () => {
-    const [count, setCount] = useState(5001)
-
-    const handleClick=(event)=> {
-        setCount(count + 1)
-    }
-
-    const handleCountUpdate = (newCount) => {
-        if (count < newCount) {
-            setCount(newCount)
-        }
-    }
-
-    return <div id='my-app-div' className='text-red another-class'>
-        <h1>Hello World</h1>
-        <button onClick={handleClick}>My incrementor</button>
-        <LikeBtn className='text-red' initCount={count} onCountUpdate={handleCountUpdate}><Amp /> Perform Like</LikeBtn>
+    const darkModeContext = useDarkMode()
+    const isDark = darkModeContext.isDark
+    const wrapperClassName = isDark ? 'bg-dark text-light' : 'bg-light text-dark'
+    
+    return <div className={wrapperClassName}>
+        <h1>Hello World {isDark? 'dark': 'light'}</h1>
+        <LikeBtn className='text-red'>Like</LikeBtn>
+        <DarkModeBtn />
     </div>
+   
 }
 
 export default App
