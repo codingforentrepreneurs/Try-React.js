@@ -17,5 +17,5 @@ export const useCountdown = (seconds) => {
 
     }, [currentTime])
 
-    return currentTime
+    return [currentTime, setCurrentTime]
 }

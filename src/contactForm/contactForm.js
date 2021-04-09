@@ -45,7 +45,23 @@ export const ContactForm = () => {
         if (myFormRef && isPasswordReady) {
             const fd = new FormData(myFormRef.current)
             const fdObject = Object.fromEntries(fd)
-            console.log(myFormRef.current, fdObject)
+            const jsonData = JSON.stringify(fdObject)
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+            const options = {
+                method: "POST", 
+                headers: headers,
+                body: jsonData,
+            }
+            const url = "https://httpbin.org/anything"
+
+            fetch(url, options).then(
+                response=>response.json()).then(x=>{
+                    console.log(x)}).catch(err=>console.log(err))
+
+            // console.log(myFormRef.current, fdObject)
         }
     }
 

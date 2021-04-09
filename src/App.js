@@ -27,7 +27,7 @@ const Home = ({currentTime}) => {
 
 
 const App = () => {
-    const currentTime = useCountdown(2)
+    const [currentTime ]= useCountdown(2)
     const darkModeContext = useDarkMode()
     const isDark = darkModeContext.isDark
     const wrapperClassName = isDark ? 'bg-dark text-light' : 'bg-light text-dark'
@@ -37,6 +37,7 @@ const App = () => {
             <ul>
 
                 <li><Link to='/'>Home</Link></li>
+                <li><Link to='/contact'>Contact</Link></li>
                 <li><Link to='/blog'>Blog</Link></li>
                 <li><Link to='/blog/random'>Blog Random</Link></li>
                 <li><Link to='/blog/hello-world'>Blog Hello World</Link></li>
