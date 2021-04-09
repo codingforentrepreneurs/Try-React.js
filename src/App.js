@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import {Switch, Route, Link} from 'react-router-dom'
 
 import {LikeBtn} from './buttons/likeBtn'
@@ -9,15 +10,14 @@ import {useCountdown} from './hooks/useCountdown'
 import {BlogListPage, BlogDetailPage} from './blog/blogDetail'
 import {ContactPage} from './contactForm/contactPage'
 
+import './styles/custom.scss'
 
-const Home = ({currentTime}) => {
-    
+const Home = ({currentTime}) => {    
     const darkModeContext = useDarkMode()
     const isDark = darkModeContext.isDark
-
-
+    const headerClassName = classnames('bold', {'text-green': currentTime >= 3, 'text-red': currentTime<3})
     return <div>
-        <h1>Hello World {isDark? 'dark': 'light'}</h1>
+        <h1 className={headerClassName}>Hello World {isDark? 'dark': 'light'}</h1>
                 <p>Your time is {currentTime}</p>
                 <LikeBtn className='text-red'>Like</LikeBtn>
                 <DarkModeBtn />
@@ -27,7 +27,7 @@ const Home = ({currentTime}) => {
 
 
 const App = () => {
-    const [currentTime ]= useCountdown(2)
+    const [currentTime ]= useCountdown(5)
     const darkModeContext = useDarkMode()
     const isDark = darkModeContext.isDark
     const wrapperClassName = isDark ? 'bg-dark text-light' : 'bg-light text-dark'

@@ -1,0 +1,18 @@
+$red: red;
+$darkGreen: green;
+$lightGreen: rgb(164, 246, 0);
+
+.text-green {
+    color: $darkGreen;
+    &:hover {
+        color: $lightGreen;
+    }
+}
+
+.text-red {
+    color: $red;
+}
+
+.bold {
+    font-weight: bold;
+}
