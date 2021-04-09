@@ -8,7 +8,7 @@ export const LikeBtn = ({initCount, onCountUpdate, ...otherProps}) => {
     const defaultLabel = otherProps.children ? otherProps.children : 'Like'
     const [label, toggleLabel] = useTempLabel(defaultLabel, "Liked", 2000)
     const [count, setCount] = useState(initCount ? initCount : 0)
-    console.log('LikeBtn', otherProps, count, initCount)
+    // console.log('LikeBtn', otherProps, count, initCount)
  
     useEffect(()=>{
         if (count < initCount) {
