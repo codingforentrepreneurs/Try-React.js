@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel serve src/index.html -p 1234"
+    "start": "parcel serve src/index.html -p 1234 -d dev/ --cache-dir .parcel-cache",
+    "djangoDev": "parcel build src/index.html -d djproject/",
+    "prodClean": "rm -rf prod",
+    "build": "yarn prodClean && parcel build src/index.html -d prod --experimental-scope-hoisting --cache-dir .parcel-cache --public-url https://cdn.mysite.com/static/ui/"
   },
   "dependencies": {
     "classnames": "^2.3.1",
